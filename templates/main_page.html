@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <title>BioInfoBank</title>
+</head>
+<body id="body">
+  <header id="main-header" class="bg-warning text-white p-4 mb-3">
+    <div class="container">
+      <div class="row">
+      <div class="col-md-6">
+        <h1 id="header-title">Websites</h1>
+      </div>
+      </div>
+        <div class="row">
+            <div class="col-md-12">
+            <h1 id="header-title">BioInfoBank</h1>
+            </div>
+        </div>
+    </div>
+  </header>
+
+  <div class="container-fluid">
+   <div id="main" class="card card-body border-rounded border-warning">
+    <h2 class="title">Availability check: </h2>
+
+       <form class="form-inline mb-3" id="changeInterval">
+           <!-- <input type="number" class="form-control mb-2 mr-2 w-50" id="time" placeholder="Set period of checking webs' availability in [s]..."> -->
+
+      <!-- <select class="form-control mr-2 mb-2">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select> -->
+           <input type="submit" class="btn btn-dark mb-2" value="Reaload">
+        </form>
+
+    <h2 class="title">Websites:</h2>
+    <table id="items" class="table table-sm table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>@</th>
+                <th>URL</th>
+                <th>REQUIREMENT_STRING</th>
+                <th>STATUS CODE</th>
+                <th>STATUS MESSAGE</th>
+                <th>LAST CHECKED</th>
+                <th>LOAD TIME[s]</th>
+                <th>REQUIREMENT_STATUS</th>
+
+            </tr>
+        </thead>
+        <tbody >
+            {% if urls_list %}
+                {% for row in urls_list %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td><a target="_blank" href="{{ row[0] }}">{{ row[0] }}</a></td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>{{ row[6] }}</td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+    <div id="output"></div>
+    <!-- <br>
+    <button class="btn btn-dark btn-block" id="button">Click Here</button> -->
+    <!-- <br>
+    <div id="box" style="width:400px;height:200px;background:#f4f4f4"><h3>HELLO</h3></div> -->
+   </div>
+  </div>
+
+  <script type="text/javascript">
+      let interval_outer= 10000;
+      var addForm = document.getElementById('changeInterval');
+      addForm.addEventListener('submit', changeIntervalValue);
+
+      function changeIntervalValue(){
+          let inputValue = document.getElementById('time').value;
+          {#interval_outer = inputValue*1000;#}
+          {#console.log(interval_outer);#}
+
+          window.location = location.href;
+          {#console.log(inputValue)#}
+      }
+
+      setInterval("my_function();", interval_outer);
+      function my_function(){
+          window.location = location.href;
+          console.log(location.href);
+          console.log(interval_outer)
+      }
+
+
+
+</script>
+  <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
